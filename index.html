@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Manu ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+  background:linear-gradient(135deg,#ffc1e3,#ffd6ec,#ffe3f3);
+  min-height:100vh;
+  overflow-x:hidden;
+  color:#5a2a4d;
+}
+
+.section{
+  min-height:100vh;
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:40px 20px;
+  animation:fadeUp 0.8s ease;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px);} 
+  to{opacity:1;transform:translateY(0);} 
+}
+
+h1{font-size:2.8rem;margin-bottom:25px;}
+
+.main-letter{
+  max-width:850px;
+  line-height:1.9;
+  font-size:1.2rem;
+  margin-bottom:40px;
+}
+
+.big-heart{
+  font-size:60px;
+  margin:20px 0;
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);} 
+  50%{transform:scale(1.2);} 
+  100%{transform:scale(1);} 
+}
+
+.btn{
+  padding:14px 30px;
+  border:none;
+  border-radius:40px;
+  background:white;
+  color:#ff4fa3;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+  font-size:1rem;
+}
+
+.btn:hover{transform:scale(1.1);} 
+
+.lore-list{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  margin-top:30px;
+  max-width:600px;
+}
+
+.lore-item{
+  background:white;
+  color:#ff4fa3;
+  padding:20px;
+  border-radius:20px;
+  cursor:pointer;
+  transition:0.3s;
+  font-weight:600;
+}
+
+.lore-item:hover{transform:scale(1.05);} 
+
+.lore-content{
+  max-width:800px;
+  line-height:1.9;
+  margin-top:30px;
+  font-size:1.1rem;
+}
+
+/* Floating Hearts */
+.heart-float{
+  position:fixed;
+  bottom:-20px;
+  animation:floatUp linear forwards;
+  pointer-events:none;
+}
+
+@keyframes floatUp{
+  from{transform:translateY(0) scale(1);opacity:0.9;}
+  to{transform:translateY(-110vh) scale(1.6);opacity:0;}
+}
+
+</style>
+</head>
+<body>
+
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+  <source src="count_on_me.mp3" type="audio/mpeg">
+</audio>
+
+<!-- HOME -->
+<div id="home" class="section" style="display:flex;">
+  <h1>Happy Birthday, Manu ❤️</h1>
+
+  <div class="main-letter">
+    You are not just my best friend, you are my favorite person to share stupid jokes with,
+    my comfort during bad days, and my happiness during good ones.
+    <br><br>
+    That rainy day when we played like kids and ate ice cream together 🌧️🍦 will always
+    stay in my heart. Simple moments with you become special memories.
+    <br><br>
+    Somewhere along the way, I realized something — what we have is rare.
+    And I will always cherish it.
+  </div>
+
+  <div class="big-heart">❤️</div>
+
+  <button class="btn" onclick="startExperience()">Click Me ✨</button>
+
+  <p style="margin-top:40px;">Forever your best friend,<br>Tahir ✨</p>
+</div>
+
+
+<!-- LORE SELECTION -->
+<div id="loreSelect" class="section">
+  <h1>Our Memories 📖</h1>
+
+  <div class="lore-list">
+    <div class="lore-item" onclick="openLore(1)">First Sem – The Beginning 💫</div>
+    <div class="lore-item" onclick="openLore(2)">The Mall Chaos Day 🛍️</div>
+    <div class="lore-item" onclick="openLore(3)">Ice Cream in the Rain 🌧️🍦</div>
+    <div class="lore-item" onclick="openLore(4)">Under25 Volunteer Era 🔥</div>
+  </div>
+
+  <button class="btn" style="margin-top:30px;" onclick="goHome()">⬅ Back</button>
+</div>
+
+
+<!-- LORE PAGE -->
+<div id="lorePage" class="section">
+  <h1 id="loreTitle"></h1>
+  <div id="loreText" class="lore-content"></div>
+  <button class="btn" style="margin-top:30px;" onclick="backToSelection()">⬅ Back to Memories</button>
+</div>
+
+<script>
+const home = document.getElementById('home');
+const loreSelect = document.getElementById('loreSelect');
+const lorePage = document.getElementById('lorePage');
+const music = document.getElementById('bgMusic');
+
+function hideAll(){
+  home.style.display = 'none';
+  loreSelect.style.display = 'none';
+  lorePage.style.display = 'none';
+}
+
+function startExperience(){
+  music.volume = 0;
+  music.play().catch(()=>{});
+
+  // Soft fade in
+  let fade = setInterval(()=>{
+    if(music.volume < 0.9){
+      music.volume += 0.05;
+    } else {
+      clearInterval(fade);
+    }
+  },200);
+
+  hideAll();
+  loreSelect.style.display = 'flex';
+}
+
+function goHome(){
+  hideAll();
+  home.style.display = 'flex';
+}
+
+function backToSelection(){
+  hideAll();
+  loreSelect.style.display = 'flex';
+}
+
+function openLore(id){
+  const title = document.getElementById('loreTitle');
+  const text = document.getElementById('loreText');
+
+  const lores = {
+    1:{
+      title:"The Beginning 💫",
+      text:"In the first semester, I really wanted to talk to you, but I was too shy to take that first step🥹😅. I used to think so many times about starting a conversation, but I never had the courage🥲. Then on your birthday, I finally texted you  and that one message changed everything😌. Slowly, our conversations started growing. Beech beech mein hum random baatein karte the, kabhi serious talks😗, kabhi bina wajah hasi… 😂aur pata hi nahi chalta tha kab time itna jaldi nikal jata tha😫. We started talking for hours and hours on Snapchat😭. It’s crazy how Snapchat is the reason we met and became this close💀. From being shy strangers to becoming best friends, our bond grew so naturally. And honestly, I’m really grateful that I gathered the courage to send that one birthday text. 💙✨."
+    },
+    2:{
+      title:"The Mall Chaos 🛍️",
+      text:"One day we were just texting casually😆 and out of nowhere I said Shall we go have some ice cream?😮‍💨🍦 It felt like such a small and random idea at that moment😂 but I had no idea it would turn into one of the most special days for me❤️ The next day after college while we were walking on the road we decided to go to the mall🙃 We roamed around without any plan🥴 just enjoying every little moment😁 We talked nonstop about our memories🥹 our thoughts our silly stories and laughed at the most random things😭Being with you felt so easy and natural like time didn't even matter🫶Aur jab hum wapas ghar aa rahe the bus mein woh sunset kuch alag hi feel de raha tha🥺 Aasmaan ke colours change ho rahe the aur hum baith kar poore din ke baare mein baat kar rahe the kaise kya hua kis baat pe hum sabse zyada hase🥹 Woh shaant sa safar😌 tumhari hasi aur tumhare paas baithne ka comfort🫶 sab kuch dil ko touch kar gaya It wasn't just an ice cream plan it was a memory that I'll always hold close to my heart💫Next time aur bhi zyada khoobsurat aur yaadgaar memory banayenge, pakka Mannu ji❤️"
+    },
+    3:{
+      title:"Ice Cream in the Rain 🌧️🍦",
+      text:"One day we were all sitting in your class, acting serious but actually doing all kinds of funny things😂. In between all the laughter, we were trying to complete our assignments 🥴which is honestly one of the biggest headaches in our college🙄 Even while writing, we couldn't stop joking around and teasing each other.😆Then suddenly it started raining😗. Without thinking much, I said I wanted to go out and get wet in the rain🥹 and I asked you to come with me. When you agreed, it made the moment even better😭🫶. We both ran outside and got completely soaked, laughing like little kids, playing in the rain without caring about anything else🥺. After that, we even ate ice cream  even though we knew we might get sick🥶, but at that time, ice cream felt more important than our health💀That day, standing in the rain with you, I felt truly happy😊❤️. It wasn't just about getting wet or eating ice cream, it was about the freedom, the laughter, and the comfort of being with you🫠Woh din simple tha, thoda pagalpan tha, par dil se woh meri sabse pyaari aur yaadgaar memories mein se ek ban gaya❤️❤️"
+    },
+    4:{
+      title:"The Volunteer Era 🔥",
+      text:"Idk if u remember but there was an event by Under 25, and we were the volunteers for it😌. From the beginning, the whole atmosphere felt exciting and different😆. Even though we had responsibilities and work to manage, we somehow turned every task into fun😂. Running around🥴, coordinating things, and laughing in between the chaos made the whole experience unforgettable.❤️I got to spend so much time with you that day🫶. Whether it was handling duties together😅, sharing small jokes during breaks😆, or just standing side by side watching the event unfold, every moment felt meaningful. It wasn't just about volunteering; it was about the time we shared in between the work, the smiles, and the comfort of being together in that busy crowd.🫶That event became more special for me, not because of the stage or performances, but because I got to create another beautiful memory with you☺️Woh Under 25 ka din sirf ek event nahi tha, balki tumhare saath bitaya hua ek aur yaadgaar chapter ban gaya.🫶🫂"
+    }
+  };
+
+  title.innerText = lores[id].title;
+  text.innerText = lores[id].text;
+
+  hideAll();
+  lorePage.style.display = 'flex';
+}
+
+// Floating hearts
+let currentHeart = '❤️';
+
+function createHeart(){
+  const heart = document.createElement('div');
+  heart.classList.add('heart-float');
+  heart.innerHTML = currentHeart;
+  heart.style.left = Math.random()*100 + 'vw';
+  heart.style.fontSize = (Math.random()*20 + 15) + 'px';
+  heart.style.animationDuration = (Math.random()*3 + 4) + 's';
+  document.body.appendChild(heart);
+  setTimeout(()=>{heart.remove();},6000);
+}
+
+setInterval(createHeart,600);
+</script>
+
+</body>
+</html>
